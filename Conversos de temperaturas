@@ -1,0 +1,11 @@
+# Entrada de dados
+
+celsius = float(input(" Digite a temperatura em graus celsius: "))
+
+#Processamento: Converter a temperatura
+
+fahre = (celsius *9/5) + 32
+
+#imprimi a conversão
+
+print(f"{celsius} C é igual a {fahre}F")
