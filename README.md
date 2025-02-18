@@ -5,7 +5,7 @@
 
 - 🌱 Atualmente, estou aprendendo **Python, análise de dados, bibliotecas pandas**
 
-- 👯 Estou procurando colaborar em **projetos de análise de dados** dados**
+- 👯 Estou procurando colaborar em **projetos de análise de dados** 
 
 - 🤝 Estou procurando ajuda com **Analise de dados e Python**
 
