@@ -1,0 +1,18 @@
+salario = float(input('salario do colaborador: '))
+
+if salario <=1280:
+  print("aumento de 20%!")
+  salario_reajustado = (salario * 0.20) + salario
+  print (f"novo salario: {salario_reajustado: .2f}")
+elif salario >1280 and salario <=1700:
+  print("aumento de 15%!")
+  salario_reajustado = (salario * 0.15)+ salario
+  print(f"novo salario: {salario_reajustado:.2f}")
+elif salario >1700 and salario <=2500:
+  print("aumento de 10%")
+  salario_reajustado = (salario * 0.15)+ salario
+  print(f"novo salario: {salario_reajustado :.2f}")
+elif salario >2500:
+  print("aumento de 5%")
+  salario_reajustado = (salario * 0.05)+ salario
+  print(f"novo salario: {salario_reajustado: .2f}")
