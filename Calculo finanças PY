@@ -1,0 +1,96 @@
+import os
+
+def limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def pausa():
+    input("\nPressione Enter para continuar...")
+
+def mostra_menu():
+    limpar_tela()
+    print("\n\n\tSimplifica Finanças")
+    print("Menu de opções:")
+    print("1- Cadastrar Receita")
+    print("2- Cadastrar Despesa")
+    print("3- Ver Saldo")
+    print("4- Listar Extrato")
+    print("5- Sair")
+
+def add_receita(receitas):
+    limpar_tela()
+    descricao = input("Digite a descrição da receita: ")
+    while True:
+        try:
+            valor = float(input("Digite o valor da receita: "))
+            if valor < 0:
+                print("O valor não pode ser negativo. Tente novamente.")
+                continue
+            break
+        except ValueError:
+            print("Valor inválido. Por favor, insira um número.")
+    receitas.append({"descricao": descricao, "valor": valor})
+    print("Receita cadastrada com sucesso!")
+    pausa()
+
+def add_despesa(despesas):
+    limpar_tela()
+    descricao = input("Digite a descrição da despesa: ")
+    while True:
+        try:
+            valor = float(input("Digite o valor da despesa: "))
+            if valor < 0:
+                print("O valor não pode ser negativo. Tente novamente.")
+                continue
+            break
+        except ValueError:
+            print("Valor inválido. Por favor, insira um número.")
+    despesas.append({"descricao": descricao, "valor": valor})
+    print("Despesa cadastrada com sucesso!")
+    pausa()
+
+def listar_saldo(receitas, despesas):
+    limpar_tela()
+    total_receitas = sum(receita["valor"] for receita in receitas)
+    total_despesas = sum(despesa["valor"] for despesa in despesas)
+    saldo = total_receitas - total_despesas
+    print(f"\nO saldo da conta é: R$ {saldo:.2f}")
+    pausa()
+
+def listar_extrato(receitas, despesas):
+    limpar_tela()
+    print("\nExtrato:")
+    print("\nReceitas:")
+    for receita in receitas:
+        print(f"{receita['descricao']}: R$ {receita['valor']:.2f}")
+    print("\nDespesas:")
+    for despesa in despesas:
+        print(f"{despesa['descricao']}: R$ {despesa['valor']:.2f}")
+    pausa()
+
+def main():
+    receitas = []
+    despesas = []
+    while True:
+        mostra_menu()
+        try:
+            opcao = int(input("Escolha uma opção: "))
+            if opcao == 1:
+                add_receita(receitas)
+            elif opcao == 2:
+                add_despesa(despesas)
+            elif opcao == 3:
+                listar_saldo(receitas, despesas)
+            elif opcao == 4:
+                listar_extrato(receitas, despesas)
+            elif opcao == 5:
+                print("Saindo do Programa...")
+                break
+            else:
+                print("Opção Inválida. Por favor, escolha uma opção válida.")
+                pausa()
+        except ValueError:
+            print("Entrada inválida. Por favor, insira um número.")
+            pausa()
+
+if __name__ == "__main__":
+    main()
