@@ -9,8 +9,10 @@ qr = qrcode.QRCode(version=1, box_size=10, border=5)
 # Adicionando os dados (URL) ao qrcode
 qr.add_data(url)
 qr.make(fit=True)
+
 #criando uma imagem do qrcode
 img = qr.make_image(fill='black', back_color='white')
+
 #salvando o qrcode como um arquivo de imagem
 img.save("qrcode=.png")
 print("Qr code parahttps: gerados com sucesso")
