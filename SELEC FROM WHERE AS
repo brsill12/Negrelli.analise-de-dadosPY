@@ -1,4 +1,4 @@
-Exercicio 1)
+Exercicio 1)                                                                                                               
  Considere o conjunto de dados[Sales.LT].[SalesOrderHeader].
  voce deve recuperar informacoes basicas sobre os pedidos
  Escreva uma consulta sql usando apenas clausulas
@@ -33,3 +33,21 @@ LastName AS Sobrenome,
 EmailAddress AS 'E-mail',
 Phone AS Telefone
 FROM SalesLT.Customer
+
+
+
+/*
+	4) A análise eficaz dos dados de vendas é crucial para otimizar as estratégias de negócio. 
+	A ausência de insights abrangentes sobre o desempenho das vendas limita a capacidade de tomar decisões informadas sobre 
+		gerenciamento de estoque e campanhas de marketing.
+
+	Obter dados essenciais de vendas é o primeiro passo. Utilizando o schema [SalesLT], 
+	crie uma consulta que exiba as colunas: SalesOrderID, ProductID, OrderQty e LineTotal da tabela 'SalesOrderDetail'."
+*/
+
+SELECT
+SalesOrderID,
+ProductID,
+OrderQty,
+LineTotal 
+FROM SalesLT.SalesOrderDetail
