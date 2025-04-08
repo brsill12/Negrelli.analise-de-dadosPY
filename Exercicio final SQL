@@ -1,0 +1,82 @@
+/*
+    1- Contar o numero de produtos por categoria:
+    Liste o ID da categoria e a quantidade de produtos em cada um
+*/
+
+SELECT
+    pc.Name AS Categoria,
+    COUNT(ProductID) AS QuantidadedeProduto
+FROM SalesLT.Product AS p
+    JOIN SalesLT.ProductCategory AS pc
+        ON p.ProductCategoryID = pc.ProductCategory
+GROUP BY pc.Name
+ORDER BY QuantidadedeProduto DESC
+
+/*
+    2- Calcular o total de vendas do produto
+        Mostre o total de vendas(Linetotal) por produto
+*/
+
+SELECT 
+    p.Name AS Produto,
+    SUM(LineTotal) AS Faturamento
+FROM SalesLT.SalesOrderDetail AS sod
+    JOIN SalesLT.Product AS p
+        ON sod.ProductID = p.ProductID
+GROUP BY p.Name
+ORDER BY Faturamento DESC
+
+/*
+    3- Obter média do preço padrão por categoria:
+        Liste o id da categoria e a média do preço padrão(ListPrice) dos produtos em
+        cada categoria 
+*/
+
+SELECT
+    pc.Name, 
+    AVG(ListPrice) AS precomedio
+FROM 
+    SalesLT.Product AS p
+    JOIN SalesLT.ProductCategory AS pc
+        ON p.ProductCategoryID = pc.ProductCategoryID
+GROUP BY
+    pc.Name
+ORDER BY precomedio DESC
+
+/*
+    4- Encontrar o numero de produtos, por faixa de preço:
+        Classifique os produtos em faixa de preço e conte
+        quantos produtos estão em cada faixa
+
+        Preço < 100: Faixa "Barato"
+        Preço entre 100 e 500: faixa "Moderado"
+        Preço > 500: faixa "Caro"
+*/
+
+SELECT
+CASE
+    WHEN ListPrice < 100 THEN 'Barato'
+    WHEN ListPrice >= 500 THEN 'Moderado'
+    ELSE 'Caro'
+END AS faixaPreço,
+COUNT (*) AS Quantidadedeprodutos
+FROM SalesLT.Product
+GROUP BY 
+    CASE 
+        WHEN ListPrice < 100 THEN 'Barato'
+        WHEN ListPrice >= 500 THEN 'Moderado'
+        ELSE 'Caro'
+END
+
+/*
+Filtrar clientes com gasto médio elevado
+*/
+
+
+SELECT
+    CustomerID,
+    Name,
+    AVG AS GastoMedio
+ FROM SalesLT.Customer AS c
+    JOIN SalesLT.CustomerID AS cd
+        ON cd.CustomerID = c.CustomerID
