@@ -16,3 +16,20 @@ SalesOrderID,
 OrderDate,
 TotalDue
 FROM SalesLT.SalesOrderHeader
+
+
+3) Usando o conjunto de dados [SalesLT].[Custumer], escreva uma consulta
+usando apenas a clausula SELECT e FROM para exibir as seguintes colunas:
+
+FirstName
+LastName
+EmailAddres
+Phone
+*/
+
+SELECT 
+FirstName AS Nome, 
+LastName AS Sobrenome,   
+EmailAddress AS 'E-mail',
+Phone AS Telefone
+FROM SalesLT.Customer
