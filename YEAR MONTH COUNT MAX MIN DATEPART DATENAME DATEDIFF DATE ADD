@@ -1,0 +1,92 @@
+SELECT
+    YEAR(OrderDate) AS Ano,
+    MONTH(OrderDate) AS Mes,
+    COUNT(*) AS Total_Pedidos
+FROM SalesLT.SalesOrderHeader
+GROUP BY 
+    MONTH(OrderDate),
+    YEAR(OrderDate)
+
+
+SELECT
+    MAX(OrderDate) AS UltimaDataPedido,
+    MIN(OrderDate) AS PrimeiraDataPedido
+FROM SalesLT.SalesOrderHeader
+
+
+SELECT
+    DATEPART(YEAR, OrderDate) AS Ano,
+    DATEPART(MONTH, OrderDate) AS Mes,
+    DATENAME(MONTH, OrderDate) AS Mes_Descr,
+    DATENAME(Weekday, OrderDate) AS Dia_Semana
+FROM SalesLT.SalesOrderHeader
+
+
+-- Diferença entre datas
+SELECT
+    OrderDate,
+    DATEDIFF(DAY, OrderDate, ShipDate) AS DiasEntrega
+FROM SalesLT.SalesOrderHeader
+
+
+-- 
+SELECT
+    OrderDate,
+    DATEADD(DAY, 7, OrderDate) AS DataPrevistaEntrega
+FROM SalesLT.SalesOrderHeader
+
+
+
+
+-- Quantos clientes temos na nossa carteira?
+SELECT 
+    COUNT(*) AS qtd_cliente
+FROM DimCustomer
+--407
+
+-- Quantos produtos
+SELECT 
+    COUNT(*) AS qtd_produto
+FROM DimProduct
+-- 298
+
+-- Qual o periodo de vendas
+SELECT
+    Distinct Year(DateAltKey) AS Ano    
+FROM DimDate
+-- 2021 e 2022
+
+
+SELECT
+    COUNT(*)
+FROM FactSalesOrder
+-- 4311
+
+-- Quantidade de Pedidos por Cliente
+-- -------------------------------------------------------------------
+SELECT
+    dc.FirstName + ' ' + LastName AS NomeCliente,
+    COUNT(*) AS Qtd_Pedido
+FROM FactSalesOrder fso
+    JOIN DimCustomer dc
+        ON fso.CustomerKey = dc.CustomerKey
+GROUP BY dc.FirstName + ' ' + LastName
+ORDER BY Qtd_Pedido DESC
+
+
+
+
+
+IF EXISTS (
+    SELECT * FROM sys.sysobjects
+    WHERE name = 'DimProduct')
+DROP TABLE dbo.DimProduct;
+GO
+
+CREATE TABLE dbo.DimProduct
+(
+    ProductKey INTEGER NOT NULL,
+    ProductAltKey VARCHAR(25) NULL,
+    ProductName VARCHAR(50) NOT NULL,
+    Category VARCHAR(50) NULL,
+    ListPrice DECIMAL NULL
