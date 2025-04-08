@@ -1,0 +1,37 @@
+/*
+Manipulação de texto
+*/
+
+SELECT
+    Name,
+    ProductNumber,
+    UPPER(Name) AS NOMEMAIUSCULA,
+    LOWER(Name) AS nomeminusculo,
+    Name + '-' + COALESCE(ProductNumber, 'N/A') AS NomeCompleto,
+    LEFT(ProductNumber,5) AS PrimeirosCaracteres,
+    RIGHT(ProductNumber,5) AS UltimosCaracteres,
+    LTRIM(Name) AS RemoveEspaçoaEsquerda,
+    RTRIM(Name) AS RemoveEspaçoaDireita,
+    REPLACE(ProductNumber, '-','/') AS Traçoporbarra
+FROM SalesLT.Product
+
+
+
+SELECT
+    ProductNumber,
+    LEFT(ProductNumber, CHARINDEX('-',ProductNumber) - 1) AS PosiçãoEsquerda,
+
+    RIGHT(ProductNumber, LEN(ProductNumber) -  CHARINDEX('-',ProductNumber)) AS ParteDepoisdoHifen,
+    
+    LEN(ProductNumber) AS TotalCaracteres,
+    CHARINDEX('-',ProductNumber) AS PosiçãoHifen
+
+FROM SalesLT.Product
+
+
+
+
+SELECT
+    ProductID,
+    CAST(ProductID AS VARCHAR) AS ChaveUnica
+FROM SalesLT.Product
