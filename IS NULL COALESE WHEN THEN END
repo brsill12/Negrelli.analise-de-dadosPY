@@ -1,0 +1,40 @@
+-- Como trabalhar com valores nulos
+
+SELECT
+    Weight,
+    ISNULL(Weight, 0) AS WeightValorFixo,
+    COALESCE(Weight, ListPrice, 0) AS ValorcPrioridade
+FROM SalesLT.Product
+-- WHERE Weight IS NULL
+-- WHERE Weight IS NOT NULL 
+WHERE ISNULL(Weight,0) <> 0
+
+
+-- Informações de Produtos
+-- Weigth < 1000 -> Leve
+-- Weight > 1000 e < 5000 -> Moderado
+-- Weight > 5000 -> Pesado
+-- Weight IS NULL -> Indefinido
+
+
+SELECT
+    CASE
+        WHEN Weight IS NULL THEN 'Indefinido'   
+        WHEN Weight < 1000 THEN 'Leve'
+        WHEN Weight > 5000 THEN 'Moderado'
+        ELSE 'Pesado'
+    END AS WeightCategory,
+        COUNT(*) AS ProductCount
+FROM SalesLT.Product
+GROUP BY 
+    CASE 
+    WHEN Weight IS NULL THEN 'Indefinido'
+    WHEN Weight < 1000 THEN 'Leve'
+    WHEN Weight > 5000 THEN 'Moderado'
+    ELSE 'Pesado'
+  END
+
+SELECT
+    COUNT (*) AS Quantidade_Null
+FROM SalesLT.Product
+WHERE Weight IS NULL
