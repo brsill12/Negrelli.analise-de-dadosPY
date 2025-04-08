@@ -1,0 +1,128 @@
+/*	
+	Exercício 1) 
+		Encontrar pedidos com valor total maior que 5000:
+		Liste os pedidos cujo valor total devido (TotalDue) seja maior que 5000.
+
+		
+*/
+1)
+SELECT 
+*
+FROM SalesLT.SalesOrderHeader
+WHERE TotalDue > 5000
+
+/*
+	Exercício 2) 
+		Filtrar clientes pelo nome da empresa:
+		Liste os clientes cuja empresa tenha "Bike" no nome.
+
+		
+*/
+2)
+SELECT TOP 100
+*
+FROM SalesLT.Customer
+WHERE CompanyName LIKE '%Bike%'
+
+/*	Exercício 3) 
+		Exibir produtos com custo entre 10 e 50$:
+		Liste os produtos cujo custo disponível (StandartCost) esteja entre 10 e 50.
+		
+			
+*/
+
+3)
+SELECT
+*
+FROM SalesLT.Product
+WHERE StandardCost BETWEEN 10 AND 50
+
+
+/*
+	Exercício 4)
+		Filtrar produtos com margem de lucro negativa:
+		Liste os produtos cujo custo padrão (StandardCost) seja maior que o preço padrão (ListPrice).
+	
+	
+	
+*/
+
+4)
+SELECT
+*
+FROM SalesLT.Product
+WHERE StandardCost > ListPrice
+
+
+/* 
+5) Selecionar pedidos filtrando múltiplas condições
+	Objetivo: Obter pedidos (SalesOrderHeader) que atendam aos seguintes critérios:
+
+    		O pedido foi feito a partir de 2008 (OrderDate >= '2008-06-01')
+    		O TotalDue está acima de 1000 OU foi faturado (Status = 5)
+    		O pedido foi feito para um cliente cujo ID está entre 20000 e 30000
+    		O envio foi feito via ShipMethod = 'CARGO TRANSPORT 5' E a conta do cliente não está bloqueada (OnlineOrderFlag = 0)
+*/
+
+SELECT 
+*
+FROM SalesLT.SalesOrderHeader
+WHERE Orderdate >= '2008-06-01'
+AND CustomerID BETWEEN 2000 AND 3000
+AND  ShipMetod = 'CARGO TRANSPORT 5' 
+AND OnlineOrderFlag = 0
+AND ( TotalDue > 1000 OR (status = 5)
+
+
+
+
+/* Exercício 6) Selecionar produtos com critérios avançados
+Objetivo: Filtrar os produtos (SalesLT.Product) que atendam aos seguintes critérios:
+
+O produto tem cor definida 
+O preço de lista (ListPrice) é maior que 500 OU o custo padrão (StandardCost) é maior que 200
+O produto NÃO é preto 
+O peso está entre 1kg e 10kg OU a categoria do produto (ProductCategoryID) é 4 ou 5
+O produto deve ter um número (ProductNumber) que começa com 'BK'
+
+*/
+
+SELECT 
+*
+FROM SalesLT.Product
+WHERE Color IS NOT NULL 
+AND  
+Color <> 'Black'
+AND
+ListPrice > 500 OR StandardCost > 200 
+AND
+(Weight BETWEEN 1 AND 10 OR ProductCategoryID IN (4,5)) 
+AND 
+ProductNumber LIKE '%BK%'
+
+
+/* Exercício 7) Analisando clientes com múltiplos filtros
+        	Selecionar clientes (SalesLT.Customer) que atendam aos seguintes critérios:
+
+        	O cliente tem um nome definido 
+        	O sobrenome do cliente (LastName) começa com "M" ou "S"
+        	O cliente tem um ID entre 10000 e 50000
+        	O email (EmailAddress) contém "adventure" ou termina com ".org"
+        	O telefone (Phone) não é nulo E começa com "1 (" (indicando um código de área específico)
+*/
+
+SELECT 
+*
+FROM SalesLT.Customer
+WHERE 
+FirstName IS NOT NULL 
+AND 
+(LastName LIKE 'M%' OR LastName LIKE 'S%')
+AND 
+CustomerID BETWEEN 1000 AND 50000
+AND
+(EmailAddress LIKE '%adventure%' OR EmailAddress '%.org')
+AND 
+Phone IS NOT NULL
+AND 
+Phone LIKE '1(%'
