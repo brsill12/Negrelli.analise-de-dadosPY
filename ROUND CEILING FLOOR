@@ -1,0 +1,10 @@
+-- Manipulação de Numeros
+
+SELECT
+    ProductID,
+    ListPrice AS PreçoOriginal,
+    ROUND(ListPrice, 2) AS PreçoArredondado,
+    ROUND(ListPrice, 2, 1) AS PreçoTruncado,
+    CEILING(ListPrice) AS PreçoArredpraCima,
+    FLOOR(ListPrice) AS PreçoArredparaBaixo
+FROM SalesLT.Product
