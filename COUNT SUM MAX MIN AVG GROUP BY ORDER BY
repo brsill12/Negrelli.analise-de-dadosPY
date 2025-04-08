@@ -1,0 +1,26 @@
+/*
+Agregando dados
+*/
+
+
+SELECT 
+    ProductID,
+    COUNT (*) AS Qtd_linhas,
+    COUNT(OrderQty) AS Qtd_linhas_nao_nulas,
+    -- Medidas de posição
+    MIN(OrderQty) AS Qtd_min_item,
+    AVG(OrderQty) AS Qtd_media_pedido, --avg-- media
+    MAX(OrderQty) AS Qtd_maxima_item,
+    SUM(OrderQty) AS Total_Itens_vendidos
+FROM SalesLT.SalesOrderDetail
+    --WHERE
+GROUP BY ProductID 
+
+-- Maior preço de produto por categoria
+
+SELECT
+ProductCategoryID AS Categoria,
+MAX(ListPrice) AS Maior_preço 
+FROM SalesLT.Product
+GROUP BY ProductCategoryID
+ORDER BY Categoria, Maior_preço
