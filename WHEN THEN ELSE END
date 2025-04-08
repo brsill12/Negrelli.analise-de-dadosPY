@@ -1,0 +1,44 @@
+-- Identificar produtos por faixa de preço
+-- Listar produtos e categoriza-los em:
+-- "Barato" -> preço do produto for < 100
+-- "Moderado" -> preço entre 100 e 500
+-- "Caro"  -> Preço acima de 500 
+
+-- Utilizando CASE WHEN
+
+SELECT
+ListPrice,
+CASE
+  WHEN ListPrice < 0 THEN 'Incorreto'
+  WHEN ListPrice < 100 THEN 'Barato'
+  WHEN ListPrice < 500 THEN 'Moderado'
+  -- WHEN ListPrice BETWEEN 100 AND 500 THEN 'Moderado'
+  -- WHEN ListPrice < 500 THEN 'Moderado'
+  -- WHEN ListPrice >= 100 AND ListPrice >= 500 THEN 'Moderado'
+  -- WHEN ListPrice > 500 THEN 'Caro'
+   ELSE 'Caro'
+END 
+FROM SalesLT.Product
+
+
+/*
+	Identificar pedidos com status personalizado:
+	Mostre os pedidos com um status customizado baseado no campo Status.
+
+	Status = 1: "Aprovado"
+	Status = 2: "Em Processamento"
+	Status = 3: "Finalizado"
+	Outros valores: "Indefinido"
+
+*/
+
+SELECT 
+Status,
+
+ CASE
+   WHEN Status = 1 THEN 'Aprovado'
+   WHEN Status = 2 THEN 'Em Processamento'
+   WHEN Status = 3 THEN 'Finalizado'
+  ELSE 'Indefinido'
+END
+FROM SalesLT.SalesOrderHeader
