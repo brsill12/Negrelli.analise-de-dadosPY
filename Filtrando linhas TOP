@@ -1,0 +1,48 @@
+-- como filtrar linhas no SQL
+-- Multiplos Filtros simultâneos
+
+SELECT TOP 100
+*
+FROM SalesLT.Product
+WHERE ListPrice > 1200 OR Color = 'Black'  ----- OR não atende a todos os critérios, somente a tabela escolhida ou é uma ou é outro critério.
+
+
+SELECT TOP 100
+*
+FROM SalesLT.Product
+WHERE ListPrice > 1200 AND Color IN  ('Black','Red')  ----- AND atende a todos os criterios (condições)
+                                                      ----- IN para adicionar mais informações
+
+
+
+SELECT TOP 100
+*
+FROM SalesLT.Product
+WHERE ListPrice >= 1200 AND ListPrice <= 1900  ---- AND para inserir informaços de operadores 
+
+
+
+SELECT TOP 100
+*
+FROM SalesLT.Product
+WHERE ListPrice BETWEEN 1200 AND 1900 ---- BETWEEN voce utiliza para resultados de valor
+
+
+SELECT TOP 100
+*
+FROM SalesLT.Product
+WHERE ListPrice BETWEEN 1200 AND 1900 AND Color = 'Black'
+
+
+SELECT TOP 100
+*
+FROM SalesLT.Product
+WHERE Name LIKE '%Bike%' AND Color = 'White'
+
+
+SELECT 
+*
+FROM SalesLT.Product
+WHERE 
+  ListPrice BETWEEN 1 AND 1900 AND 
+  (Name LIKE '%Bike%' OR Color = 'Silver')
